@@ -139,15 +139,22 @@ var users = [{
 }];
 
 var toggleUserState = function toggleUserState(allUsers, userName) {
-  return new Promise(function (resolve) {
-    var updatedUsers = allUsers.map(function (user) {
-      return user.name === userName ? _objectSpread(_objectSpread({}, user), {}, {
-        active: !user.active
-      }) : user;
-    });
-    resolve(updatedUsers);
+  var updatedUsers = allUsers.map(function (user) {
+    return user.name === userName ? _objectSpread(_objectSpread({}, user), {}, {
+      active: !user.active
+    }) : user;
   });
-};
+  return Promise.resolve(updatedUsers);
+}; // Второе решение
+// const toggleUserState = (allUsers, userName) => {
+//   return new Promise(resolve => {
+//     const updatedUsers = allUsers.map(user =>
+//       user.name === userName ? { ...user, active: !user.active } : user,
+//     );
+//     resolve(updatedUsers);
+//   });
+// };
+
 
 var logger = function logger(updatedUsers) {
   return console.table(updatedUsers);
@@ -183,7 +190,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3791" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "10616" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
